@@ -1,42 +1,416 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Hello</title>
-  <style>
-    :root { color-scheme: light dark; }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0; min-height: 100vh;
-      display: flex; align-items: center; justify-content: center;
-      font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
-      background: #f6f7f9; color: #1a1a1a;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>橙子🍊 | 南京城的一个老杆子</title>
+<meta name="description" content="橙子🍊 的个人主页，南京城的一个老杆子。">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#15171b" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🍊%3C/text%3E%3C/svg%3E">
+<style>
+  :root{
+    color-scheme: light dark;
+    --bg:#ffffff;
+    --text:#15171c;
+    --muted:#6b7280;
+    --faint:#9ca3af;
+    --line:rgba(0,0,0,.09);
+    --soft:rgba(0,0,0,.045);
+    --brand:#E58522;
+    --brand-hover:#D27414;
+    --radius:10px;
+  }
+  html[data-theme="dark"]{
+    --bg:#15171b;
+    --text:#e9ecf1;
+    --muted:#9aa3af;
+    --faint:#70787f;
+    --line:rgba(255,255,255,.1);
+    --soft:rgba(255,255,255,.06);
+  }
+  @media (prefers-color-scheme: dark){
+    html:not([data-theme="light"]){
+      --bg:#15171b;
+      --text:#e9ecf1;
+      --muted:#9aa3af;
+      --faint:#70787f;
+      --line:rgba(255,255,255,.1);
+      --soft:rgba(255,255,255,.06);
     }
-    main { max-width: 640px; padding: 40px 24px; }
-    h1 { font-size: 2rem; margin: 0 0 8px; letter-spacing: .5px; }
-    p.sub { color: #666; margin: 0 0 28px; }
-    ul { padding-left: 20px; line-height: 2; }
-    a { color: #0969da; text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    footer { margin-top: 40px; font-size: 13px; color: #999; }
-    @media (prefers-color-scheme: dark) {
-      body { background: #0d1117; color: #e6edf3; }
-      p.sub { color: #9198a1; }
-      footer { color: #6e7681; }
-      a { color: #4493f8; }
-    }
-  </style>
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    font-size:14px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    transition:background .2s ease,color .2s ease;
+  }
+  .page{
+    max-width:720px;
+    margin:0 auto;
+    padding:28px 24px 56px;
+  }
+
+  .nav{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+    padding-bottom:14px;
+    border-bottom:1px solid var(--line);
+  }
+  .brand{
+    font-size:15px;
+    font-weight:600;
+    letter-spacing:.2px;
+  }
+  .nav-right{
+    display:flex;
+    align-items:center;
+    gap:18px;
+  }
+  .nav nav{
+    display:flex;
+    gap:18px;
+  }
+  .nav nav a{
+    font-size:13px;
+    color:var(--muted);
+    text-decoration:none;
+    transition:color .15s;
+  }
+  .nav nav a:hover{color:var(--text);}
+  .theme-btn{
+    width:28px;
+    height:28px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    padding:0;
+    border:1px solid var(--line);
+    border-radius:8px;
+    background:transparent;
+    color:var(--muted);
+    cursor:pointer;
+    transition:background .15s,color .15s;
+  }
+  .theme-btn:hover{background:var(--soft);color:var(--text);}
+  .theme-btn svg{display:block;}
+
+  .hero{padding:36px 0 8px;}
+  .status{
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    font-size:12px;
+    color:var(--muted);
+    margin-bottom:12px;
+  }
+  .status i{
+    width:6px;height:6px;border-radius:999px;
+    background:#40B43E;display:block;flex:none;
+  }
+  h1{
+    margin:0 0 12px;
+    font-size:30px;
+    line-height:1.28;
+    font-weight:600;
+    letter-spacing:-.4px;
+  }
+  .lead{
+    margin:0;
+    font-size:15px;
+    line-height:1.7;
+    color:var(--muted);
+    max-width:460px;
+  }
+  .actions{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:22px;
+  }
+  .btn{
+    height:36px;
+    padding:0 16px;
+    display:inline-flex;
+    align-items:center;
+    border-radius:9px;
+    font-size:13px;
+    font-weight:500;
+    text-decoration:none;
+    cursor:pointer;
+    transition:background .15s,border-color .15s,color .15s;
+  }
+  .btn-primary{
+    background:var(--brand);
+    color:#fff;
+    border:1px solid var(--brand);
+  }
+  .btn-primary:hover{background:var(--brand-hover);border-color:var(--brand-hover);}
+  .btn-ghost{
+    background:transparent;
+    color:var(--text);
+    border:1px solid var(--line);
+  }
+  .btn-ghost:hover{background:var(--soft);}
+
+  .sec{margin-top:40px;}
+  .sec-head{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    gap:12px;
+    margin-bottom:14px;
+  }
+  .sec-title{
+    font-size:13px;
+    font-weight:600;
+    letter-spacing:.3px;
+  }
+  .sec-meta{
+    font-size:11px;
+    color:var(--faint);
+    letter-spacing:.5px;
+  }
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
+    gap:10px;
+  }
+  .card{
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:14px;
+    transition:background .15s,border-color .15s;
+  }
+  .card:hover{background:var(--soft);}
+  .ico{
+    width:28px;height:28px;
+    border-radius:8px;
+    display:flex;align-items:center;justify-content:center;
+    margin-bottom:10px;
+  }
+  .card h3{
+    margin:0 0 5px;
+    font-size:14px;
+    font-weight:500;
+    line-height:1.45;
+  }
+  .card p{
+    margin:0;
+    font-size:12.5px;
+    line-height:1.6;
+    color:var(--muted);
+  }
+  .tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:5px;
+    margin-top:10px;
+  }
+  .tag{
+    font-size:10px;
+    color:var(--faint);
+    border:1px solid var(--line);
+    border-radius:999px;
+    padding:1px 7px;
+    line-height:1.6;
+  }
+  .tools{
+    display:flex;
+    flex-wrap:wrap;
+    gap:7px;
+  }
+  .tool{
+    font-size:12px;
+    color:var(--muted);
+    background:var(--soft);
+    border-radius:7px;
+    padding:6px 11px;
+  }
+  .contact{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px 20px;
+  }
+  .contact a{
+    font-size:13px;
+    color:var(--text);
+    text-decoration:none;
+    border-bottom:1px solid var(--line);
+    padding-bottom:1px;
+    transition:color .15s,border-color .15s;
+  }
+  .contact a:hover{color:var(--brand);border-color:var(--brand);}
+
+  .foot{
+    margin-top:44px;
+    padding-top:16px;
+    border-top:1px solid var(--line);
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:space-between;
+    gap:8px;
+    font-size:11.5px;
+    color:var(--faint);
+  }
+
+  @media (max-width:640px){
+    .page{padding:22px 18px 44px;}
+    .nav nav{gap:14px;}
+    .nav nav a:nth-child(3){display:none;}
+    .hero{padding:26px 0 4px;}
+    h1{font-size:23px;letter-spacing:-.3px;}
+    .lead{font-size:14px;}
+    .grid{grid-template-columns:1fr;}
+    .sec{margin-top:32px;}
+  }
+</style>
 </head>
 <body>
-  <main>
-    <h1>dtceca</h1>
-    <p class="sub">个人主页 · 建设中</p>
-    <ul>
-      <li><a href="https://github.com/dtceca">GitHub 主页</a></li>
-      <li><a href="./notes/">项目笔记</a></li>
-    </ul>
-    <footer>© 2026 dtceca</footer>
-  </main>
+<div class="page">
+
+  <header class="nav">
+    <div class="brand">橙子🍊</div>
+    <div class="nav-right">
+      <nav>
+        <a href="#projects">项目</a>
+        <a href="#notes">笔记</a>
+        <a href="#about">关于</a>
+      </nav>
+      <button class="theme-btn" id="themeBtn" type="button" aria-label="切换深浅色" title="切换深浅色">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+          <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="status"><i></i>南京 · 有空就出来喝碗馄饨</div>
+    <h1>你好，我是橙子🍊</h1>
+    <p class="lead">南京城的一个老杆子。白天敲代码，晚上沿着秦淮河走两圈，顺手记点东西。</p>
+    <div class="actions">
+      <a class="btn btn-primary" href="#projects">看看我做的</a>
+      <a class="btn btn-ghost" href="#contact">联系我</a>
+    </div>
+  </section>
+
+  <section class="sec" id="projects">
+    <div class="sec-head">
+      <div class="sec-title">精选项目</div>
+      <div class="sec-meta">03</div>
+    </div>
+    <div class="grid">
+
+      <article class="card">
+        <div class="ico" style="background:rgba(88,178,220,.18);color:#58B2DC">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4">
+            <rect x="2" y="2" width="5" height="5" rx="1"/>
+            <rect x="9" y="2" width="5" height="5" rx="1"/>
+            <rect x="2" y="9" width="5" height="5" rx="1"/>
+            <rect x="9" y="9" width="5" height="5" rx="1"/>
+          </svg>
+        </div>
+        <h3>静态站脚手架</h3>
+        <p>零依赖的单文件模板，自带深色模式，拖进仓库就能跑起来。</p>
+        <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span></div>
+      </article>
+
+      <article class="card">
+        <div class="ico" style="background:rgba(0,170,144,.18);color:#00AA90">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+            <path d="M3 13V8"/><path d="M8 13V3"/><path d="M13 13v-4"/>
+          </svg>
+        </div>
+        <h3>小账本</h3>
+        <p>把每月流水按类别自动归类，月底生成一张对账单。</p>
+        <div class="tags"><span class="tag">Python</span><span class="tag">SQLite</span></div>
+      </article>
+
+      <article class="card">
+        <div class="ico" style="background:rgba(185,136,125,.2);color:#B9887D">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="3" width="12" height="10" rx="2"/>
+            <path d="M5 7l2 2-2 2"/><path d="M9.5 11h1.5"/>
+          </svg>
+        </div>
+        <h3>文件整理脚本</h3>
+        <p>按扩展名和日期把下载文件夹归好，一条命令省半小时。</p>
+        <div class="tags"><span class="tag">Node</span><span class="tag">CLI</span></div>
+      </article>
+
+    </div>
+  </section>
+
+  <section class="sec" id="notes">
+    <div class="sec-head">
+      <div class="sec-title">工具箱</div>
+    </div>
+    <div class="tools">
+      <span class="tool">JavaScript</span>
+      <span class="tool">Python</span>
+      <span class="tool">Git</span>
+      <span class="tool">Linux</span>
+      <span class="tool">Docker</span>
+      <span class="tool">Figma</span>
+    </div>
+  </section>
+
+  <section class="sec" id="about">
+    <div class="sec-head">
+      <div class="sec-title">关于</div>
+    </div>
+    <p class="lead">南京城的一个老杆子。喜欢把事情做扎实，不喜欢把事情说复杂。这个站点用 GitHub Pages 搭的，不折腾。</p>
+  </section>
+
+  <section class="sec" id="contact">
+    <div class="sec-head">
+      <div class="sec-title">联系</div>
+    </div>
+    <div class="contact">
+      <a href="mailto:hello@example.com">邮箱</a>
+      <a href="https://github.com/dtceca" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://dtceca.github.io">本站</a>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <span>© 2026 橙子🍊</span>
+    <span>Built with GitHub Pages</span>
+  </footer>
+
+</div>
+<script>
+(function(){
+  var root = document.documentElement;
+  var btn = document.getElementById('themeBtn');
+  var saved = null;
+  try { saved = localStorage.getItem('theme'); } catch (e) {}
+  if (saved === 'dark' || saved === 'light') root.setAttribute('data-theme', saved);
+
+  function currentIsDark(){
+    var t = root.getAttribute('data-theme');
+    if (t === 'dark') return true;
+    if (t === 'light') return false;
+    return window.matchMedia('(prefers-color-scheme: dark)').matches;
+  }
+
+  if (btn) {
+    btn.addEventListener('click', function(){
+      var next = currentIsDark() ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      try { localStorage.setItem('theme', next); } catch (e) {}
+    });
+  }
+})();
+</script>
 </body>
 </html>
